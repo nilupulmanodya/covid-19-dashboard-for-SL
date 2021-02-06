@@ -1,0 +1,35 @@
+def clean_country_data(country_code):
+
+    country_code = country_code[["English short name","Alpha-3 code","Numeric"]]
+    country_code.columns=['Country','code3','id']
+
+    country_code=country_code.replace(to_replace='Viet Nam', value='Vietnam')
+    country_code=country_code.replace(to_replace='Bahamas', value='Bahamas (the)')
+    country_code=country_code.replace(to_replace='Bolivia, Plurinational State of', value='Bolivia')
+    country_code=country_code.replace(to_replace='Central African Republic (the)', value='Central African Republic')
+    country_code=country_code.replace(to_replace='Congo', value='Congo (Brazzaville)')
+    country_code=country_code.replace(to_replace='Congo (the Democratic Republic of the)', value='Congo (Kinshasa)')
+    country_code=country_code.replace(to_replace='Czech Republic (the)', value='Czech Republic')
+    country_code=country_code.replace(to_replace='Dominican Republic (the)', value='Dominican Republic')
+    country_code=country_code.replace(to_replace='Gambia (The)', value='Gambia')
+    country_code=country_code.replace(to_replace='Holy See (the) [Vatican City State]', value='Holy See (Vatican City State)')
+    country_code=country_code.replace(to_replace='Iran (the Islamic Republic of)', value='Iran, Islamic Republic of')
+    country_code=country_code.replace(to_replace='Korea (the Republic of)', value='Korea (South)')
+    country_code=country_code.replace(to_replace="Lao People's Democratic Republic (the)", value='Lao PDR')
+    country_code=country_code.replace(to_replace='Macedonia (the former Yugoslav Republic of)', value='Macedonia, Republic of')
+    country_code=country_code.replace(to_replace='Marshall Islands (the)', value='Marshall Islands')
+    country_code=country_code.replace(to_replace='Micronesia (the Federated States of)', value='Micronesia, Federated States of')
+    country_code=country_code.replace(to_replace='Netherlands (the)', value='Netherlands')
+    country_code=country_code.replace(to_replace='Niger (the)', value='Niger')
+    country_code=country_code.replace(to_replace='Palestine, State of', value='Palestinian Territory')
+    country_code=country_code.replace(to_replace='Philippines (the)', value='Philippines')
+    country_code=country_code.replace(to_replace="Russia", value='Russian Federation')
+    country_code=country_code.replace(to_replace='Saint Vincent and the Grenadines', value='Saint Vincent and Grenadines')
+    country_code=country_code.replace(to_replace='Solomon Islands (the)', value='Solomon Islands')
+    country_code=country_code.replace(to_replace='Sudan (the)', value='Sudan')
+    country_code=country_code.replace(to_replace='Syrian Arab Republic (the)', value='Syrian Arab Republic (Syria)')
+    country_code=country_code.replace(to_replace='Taiwan (Province of China)', value='Taiwan, Republic of China')
+    country_code=country_code.replace(to_replace='United Arab Emirates (the)', value='United Arab Emirates')
+    country_code=country_code.replace(to_replace='United States', value='United States of America')
+    country_code=country_code.replace(to_replace='Venezuela, Bolivarian Republic of ', value='Venezuela (Bolivarian Republic)')
+    return country_code

@@ -1,5 +1,12 @@
 import pandas as pd
-from .altairplt import pcrtestbarchart
+from .altairplt import pcrtestbarchart, global_covid_map
+from .clean_country_data import clean_country_data
+import urllib3
+from urllib3 import request# to handle certificate verification
+import certifi# to manage json data
+import json# for pandas dataframes
+from pandas.io.json import json_normalize
+
 
 
 
@@ -30,3 +37,39 @@ def local_all_status():
     ,local_new_cases, local_total_cases, local_pcr_test_chart_json,update_date_time,
     local_death_rate, local_recovery_rate)
     
+
+def global_all_status():
+    http = urllib3.PoolManager(
+       cert_reqs='CERT_REQUIRED',
+       ca_certs=certifi.where())
+
+    url = 'https://api.covid19api.com/summary' 
+    r = http.request('GET', url)
+    print("r global url status:", r.status)
+
+    data = json.loads(r.data.decode('utf-8'))
+
+    global_total_confirmed = global_total_confirmed = data['Global']['TotalConfirmed']
+    global_today_new = data['Global']['NewConfirmed']
+    global_total_deaths = data['Global']['TotalDeaths']
+    global_total_recovered = data['Global']['TotalRecovered']
+    global_update_date = data['Global']['Date']
+    counties_df = pd.json_normalize(data,'Countries')
+
+    #import country geo data for map
+
+    c_url = "https://gist.githubusercontent.com/komasaru/9303029/raw/9ea6e5900715afec6ce4ff79a0c4102b09180ddd/iso_3166_1.csv"
+    country_code = pd.read_csv(c_url)
+    cleaned_country_code = clean_country_data(country_code)
+    #merge data frames
+    cc_m=pd.merge(cleaned_country_code,counties_df,how='inner',on='Country')
+
+    global_map_json = global_covid_map(cc_m)
+    #print(global_map_json)
+
+    global_death_rate = round(int(global_total_deaths)/int(global_total_confirmed)*100,2)
+    global_recovery_rate = round(int(global_total_recovered)/int(global_total_confirmed)*100,2)
+
+    return (global_total_confirmed, global_today_new, global_total_deaths, global_total_recovered,
+     global_update_date, global_map_json, global_death_rate, global_recovery_rate)
+
