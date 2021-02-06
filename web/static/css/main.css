@@ -1,0 +1,30 @@
+
+h1{
+    text-align: center;
+}
+
+#dev_wig{
+    height: 160px;
+    width: 100%;
+    opacity:0.95;
+}
+
+.dev_h8{
+    text-align: center;
+    margin:4px;
+}
+
+.dev_p
+    h1 {
+        font-size: 10px;
+}
+
+#pcr_graph{
+    height: 250px;
+    width: 100px;
+   }
+
+div.scrollmenu {
+    overflow: auto;
+    white-space: nowrap;
+  }

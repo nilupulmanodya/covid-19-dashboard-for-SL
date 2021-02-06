@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Covid-19 Dashboard</title>
+
+    
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">	  
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+      <!-- Import Vega 3 & Vega-Lite 2 (does not have to be from CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-tooltip@0.16.0/build/vega-tooltip.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+    <script src="https://vega.github.io/datalib/datalib.min.js"></script>
+
+      
+</head>
+
+<body>
+<!--Heading-->    
+    <h1>COVID-19 Dashboard</h1>
+ <!--Dashbord-->   
+    {% block content %}
+    {% endblock %}
+<!--Footer-->
+    <div class="row">
+        <div class="col">
+            <div class="card card-body" style="background-color:rgb(131, 126, 126);">
+                <p>@2021 manodya</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html> 
