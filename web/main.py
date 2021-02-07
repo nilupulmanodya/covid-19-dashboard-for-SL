@@ -8,8 +8,9 @@ app = Flask(__name__)
 def dashbord():
     #taking local data status
 
-    local_active_cases, local_deaths, local_recovered,local_new_cases, local_total_cases, local_pcr_test_chart_json,update_date_time, local_death_rate, local_recovery_rate = local_all_status()
+    local_hospital_details,local_active_cases, local_deaths, local_recovered,local_new_cases, local_total_cases, local_pcr_test_chart_json,update_date_time, local_death_rate, local_recovery_rate = local_all_status()
     global_total_confirmed, global_today_new, global_total_deaths, global_total_recovered, global_update_date, global_map_json, global_death_rate, global_recovery_rate = global_all_status()
+
 
     context = {'local_active_cases':local_active_cases, 'local_deaths':local_deaths, 'local_recovered':local_recovered,'local_new_cases':local_new_cases,
      'local_total_cases':local_total_cases, 'local_pcr_test_chart_json':local_pcr_test_chart_json, 'update_date_time':update_date_time,'local_death_rate':local_death_rate,

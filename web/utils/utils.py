@@ -12,6 +12,15 @@ from pandas.io.json import json_normalize
 
 def local_all_status():
     df_local = pd.read_json("https://hpb.health.gov.lk/api/get-current-statistical").data
+
+    hospital_data = df_local.hospital_data
+    hospital_data_list = []
+
+    for i in range (0,len(hospital_data)): 
+        hospital_data_list.append(hospital_data[i])
+    local_hospital_details=hospital_data_list
+    #print(local_hospital_details[0])
+ 
     local_active_cases=df_local.local_active_cases
     local_deaths = df_local.local_deaths
     local_recovered =df_local.local_recovered
@@ -33,7 +42,7 @@ def local_all_status():
     local_death_rate = round(int(local_deaths)/int(local_total_cases)*100,2)
     local_recovery_rate = round(int(local_recovered)/int(local_total_cases)*100,2)
 
-    return (local_active_cases, local_deaths, local_recovered
+    return (local_hospital_details, local_active_cases, local_deaths, local_recovered
     ,local_new_cases, local_total_cases, local_pcr_test_chart_json,update_date_time,
     local_death_rate, local_recovery_rate)
     
@@ -73,3 +82,6 @@ def global_all_status():
     return (global_total_confirmed, global_today_new, global_total_deaths, global_total_recovered,
      global_update_date, global_map_json, global_death_rate, global_recovery_rate)
 
+
+
+    
