@@ -20,7 +20,7 @@ h1{
 }
 
 #pcr_graph{
-    height: 250px;
+    height: 340px;
     width: 100px;
    }
 
@@ -28,3 +28,7 @@ div.scrollmenu {
     overflow: auto;
     white-space: nowrap;
   }
+
+#col_w_map{
+    width: 20;
+}

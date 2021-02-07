@@ -3,70 +3,70 @@
 {% block content %}
 <div class = "col">
     <h2>Covid-19 Situation in Sri Lanka</h2>
+    <p>Last Updated: {{context.update_date_time}}</p>
 
 <div  class="row" >
-    <div  class="col-md">	           
+    
+  <div  class="col-md">	  
+               
 		<div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(248, 127, 127);">
-			<h8>Confirmed cases</h8>			           
+      <h8 style="color:rgb(71, 0, 0);">Confirmed cases</h8>		
+      <p></p>	           
             <h3 style="color:rgb(192, 2, 2);">{{context.local_total_cases}}</h3>
-            <p class ="dev_p" style="color:rgb(71, 0, 0);">{{context.update_date_time}}</p>
 		</div>
   </div>
 
   <div class="col-md">
 		<div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(123, 153, 251);">
-			<h8>Active cases</h8>			           
+      <h8 style="color:rgb(3, 24, 95);">Active cases</h8>	
+      <p></p>		           
             <h3 style="color:rgb(10, 60, 224);">{{context.local_active_cases}}</h3>
-            <p class ="dev_p" style="color:rgb(3, 24, 95);">{{context.update_date_time}}</p>
-
 		</div>
   </div>
 
   <div class="col-md">
 		<div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(185, 182, 182);">
-			<h8>Deaths</h8>			           
+      <h8 style="color:rgb(31, 30, 30);">Deaths</h8>			 
+      <p></p>          
         <h3 style="color:rgb(63, 63, 63);">{{context.local_deaths}}</h3>
-        <p class ="dev_p" style="color:rgb(31, 30, 30);">{{context.update_date_time}}</p>
-
 		</div>
   </div>
 
   <div class="col-md">
 		<div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(159, 240, 173);">
-			<h8>Recovered</h8>			           
-        <h3 style="color:rgb(7, 207, 41);">{{context.local_recovered}}</h3>
-        <p class ="dev_p" style="color:rgb(2, 80, 15);">{{context.update_date_time}}</p>
+      <h8 style="color:rgb(2, 80, 15);">Recovered</h8>			
+      <p></p>           
+        <h3 style="color:rgb(7, 207, 41);">{{context.local_recovered}}</h3>       
 
 		</div>
   </div>
 
   <div class="col-md">
 		<div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(211, 255, 140);">
-			<h8>Daily New Cases</h8>			           
-        <h3 style="color:rgb(165, 235, 2);">{{context.local_new_cases}}</h3>
-        <p class ="dev_p" style="color:rgb(44, 80, 2);">{{context.update_date_time}}</p>
-
-		</div>
+      <h8 style="color:rgb(44, 80, 2);">Daily New Cases</h8>		
+      <p></p>	           
+        <h3 style="color:rgb(165, 235, 2);">{{context.local_new_cases}}</h3>       
+	</div>
   </div>
 
   <div class="col-md">
-		<div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(185, 182, 182);">
-      <h8>Death Rate</h8>
-      <h1 style="color:rgb(63, 63, 63);">{{context.local_death_rate}}%</h1>		           
-                      
-
-		</div>
+    <div class="row">
+      <div class="col-md">
+		<div id="dev_wig" class="card dev_h8" style="background-color:rgb(184, 195, 167);">
+      <div class="card-body" style="background-color:rgb(185, 182, 182);">
+        <h8>Death Rate</h8>
+        <h3 style="color:rgb(63, 63, 63);">{{context.local_death_rate}}%</h3>		           
+    </div>
+    
+    <div class="card-body" style="background-color:rgb(159, 240, 173);">
+      <h8>Recovery Rate</h8>			           
+      <h3 style="color:rgb(7, 207, 41);">{{context.local_recovery_rate}}%</h3> 
+    </div>
   </div>
-
-  <div class="col-md">
-		<div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(159, 240, 173);">
-
-			<h8>Recovery Rate</h8>			           
-      <h1 style="color:rgb(7, 207, 41);">{{context.local_recovery_rate}}%</h1>        
-	  </div>
+    </div>
+    
   </div>
-
-
+  </div>
 </div></div>
 <br>
 <br>
@@ -75,6 +75,7 @@
 		<div class="card card-body" style="background-color:rgb(216, 213, 213);">
 
             <h5>PCR Testing in Sri Lanka</h5>
+            <p></p>
             
             <div class="scrollmenu">
                   <!-- Placeholder for graph-->
@@ -94,73 +95,67 @@
 <br>
 <div class = "col">
   <h2>Covid-19 Global Situation</h2>
+  <p>Last Updated: {{context.global_update_date}}</p>
 
 <div  class="row" >
   <div  class="col-md">	           
   <div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(248, 127, 127);">
-    <h8>Confirmed cases</h8>			           
+    <h8 style="color:rgb(71, 0, 0);">Confirmed cases</h8>	
+    <p></p>		           
           <h3 style="color:rgb(192, 2, 2);">{{context.global_total_confirmed}}</h3>
-          <p class ="dev_p" style="color:rgb(71, 0, 0);">{{context.global_update_date}}</p>
   </div>
 </div>
 
 <div class="col-md">
   <div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(123, 153, 251);">
-    <h8>Active cases</h8>			           
-          <h3 style="color:rgb(10, 60, 224);"></h3>
-          <p class ="dev_p" style="color:rgb(3, 24, 95);">{{context.global_update_date}}</p>
-
+    <h8 style="color:rgb(3, 24, 95);">Active cases</h8>	
+    <p></p>		           
+          <h3 style="color:rgb(10, 60, 224);"></h3>    
   </div>
 </div>
 
 <div class="col-md">
   <div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(185, 182, 182);">
-    <h8>Deaths</h8>			           
+    <h8 style="color:rgb(31, 30, 30);">Deaths</h8>			           
       <h3 style="color:rgb(63, 63, 63);">{{context.global_total_deaths}}</h3>
-      <p class ="dev_p" style="color:rgb(31, 30, 30);">{{context.global_update_date}}</p>
-
+            <p></p>
   </div>
 </div>
 
 <div class="col-md">
   <div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(159, 240, 173);">
-    <h8>Recovered</h8>			           
-      <h3 style="color:rgb(7, 207, 41);">{{context.global_total_recovered}}</h3>
-      <p class ="dev_p" style="color:rgb(2, 80, 15);">{{context.global_update_date}}</p>
-
+    <h8 style="color:rgb(2, 80, 15);">Recovered</h8>		
+    <p></p>	           
+      <h3 style="color:rgb(7, 207, 41);">{{context.global_total_recovered}}</h3>    
   </div>
 </div>
 
 <div class="col-md">
   <div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(211, 255, 140);">
-    <h8>Daily New Cases</h8>			           
-      <h3 style="color:rgb(165, 235, 2);">{{context.global_today_new}}</h3>
-      <p class ="dev_p" style="color:rgb(44, 80, 2);">{{context.global_update_date}}</p>
-
+    <h8 style="color:rgb(44, 80, 2);">Daily New Cases</h8>		
+    <p></p>	           
+      <h3 style="color:rgb(165, 235, 2);">{{context.global_today_new}}</h3>      
   </div>
 </div>
 
 <div class="col-md">
-  <div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(185, 182, 182);">
-    <h8>Death Rate</h8>
-    <h1 style="color:rgb(63, 63, 63);">{{context.global_death_rate}}%</h1>		           
-                    
-
+  <div class="row">
+    <div class="col-md">
+  <div id="dev_wig" class="card dev_h8" style="background-color:rgb(184, 195, 167);">
+    <div class="card-body" style="background-color:rgb(185, 182, 182);">
+      <h8>Death Rate</h8>
+      <h3 style="color:rgb(63, 63, 63);">{{context.global_death_rate}}%</h3>		           
   </div>
-</div>
-
-<div class="col-md">
-  <div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(159, 240, 173);">
-
+  
+  <div class="card-body" style="background-color:rgb(159, 240, 173);">
     <h8>Recovery Rate</h8>			           
-    <h1 style="color:rgb(7, 207, 41);">{{context.global_recovery_rate}}%</h1>        
+    <h3 style="color:rgb(7, 207, 41);">{{context.global_recovery_rate}}%</h3> 
   </div>
 </div>
-
-
-</div></div>
-
-
+  </div>
+  
+</div>
+</div>
 </div></div>
 <br>
 <div class="col">
@@ -169,11 +164,16 @@
 
         <h5>Visualize Heat map</h5>
         <hr>
-
-        <div >
-          <!-- Placeholder for graph-->
-      <div id="global_heat_map" style="margin: auto;"></div>
-    </div>
+        <div class="container-fluid">
+          <div class="row">
+              <div id="col_w_map" class="col"></div>
+              <div class="col-6 scrollmenu">
+                  <!-- Placeholder for map-->
+                  <div id="global_heat_map"></div>
+              </div>
+              <div id="col_w_map" class="col"> </div>
+          </div>          
+      </div>
 
     </div>
 <br>
