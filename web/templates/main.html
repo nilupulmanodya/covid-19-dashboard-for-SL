@@ -205,45 +205,34 @@
 
 
 
-
-<a href="#" onClick="autoFill(); return true;" >Click to Autofill</a>
 <form>
   <p>
     <label>Text Input: </label>
-    <input type="text" id="input1">
+    <input type="text" id="form1">
   </p>
-  <p>
-    <label>Dropdown Input: </label>
-    <select id="input2">
-
-      {%for i in range(0, len)%} 
   
-            <li>{{Pokemons[i]}}</li> 
-            
+    <label>Dropdown Input: </label>
+    <select id="input">
+      {%for i in range(0, 36)%}    
+      <option value={{context.local_hospital_details[i]['id']}}>{{context.local_hospital_details[i]['hospital']['name']}}</option>
       {%endfor%} 
-
-      <option value="Dropdown1">First Option</option>
-      <option value="Dropdown2">Second Option</option>
-      <option value="Dropdown3">Third Option</option>
-    </select>
-  </p>
+    </select>    
+    <button id="btn" onClick="hospitalDetails(input.value); return true;">Get the Selected Value</button>
+    <p>{{context.local_hospital_details[1]}}</p>
+  
  </form>
-
-
-
 <script type="text/javascript">
-  function autoFill() {
-    document.getElementById('input1').value = "My Text Input";
-    document.getElementById('input2').value = "Dropdown2";
- 
-    var radioElements = document.getElementsByName("input3");
+  function hospitalDetails(hos_id_no){
+    console.log(a)
+    console.log("entered hos data");
+       
+    const btn = document.querySelector('#btn');
+    const sb = document.querySelector('#input');
+    document.getElementById('form1').value = hos_id_no ;
+    alert(sb.value);
+    
+  };
 
-    for (var i=0; i<radioElements.length; i++) {
-      if (radioElements[i].getAttribute('value') == 'Radio3') {
-        radioElements[i].checked = true;
-      }
-    }
-  }
 </script>
 
 

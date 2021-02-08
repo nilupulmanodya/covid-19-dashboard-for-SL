@@ -55,9 +55,10 @@ def global_all_status():
     url = 'https://api.covid19api.com/summary' 
     r = http.request('GET', url)
     print("r global url status:", r.status)
-
+    #try:
     data = json.loads(r.data.decode('utf-8'))
-
+    #except ValueError:  # includes simplejson.decoder.JSONDecodeError
+    #    print ('Decoding JSON has failed')
     global_total_confirmed = global_total_confirmed = data['Global']['TotalConfirmed']
     global_today_new = data['Global']['NewConfirmed']
     global_total_deaths = data['Global']['TotalDeaths']
