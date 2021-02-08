@@ -84,10 +84,43 @@
 
 		</div>
 <br>
-    <div class="card card-body" style="background-color:darkgray;">
-
-        <h5>Visualize hospital details</h5>
+    <div class="card card-body" style="background-color:rgb(216, 210, 210);">
+      <div class="col-md">
+        <h5>Covid-19 Hospital details in Sri Lanka</h5>
         <hr>
+        <form>
+  
+  
+          <label>Hospital Name: </label>
+          <select id="input">
+            {%for i in range(0, 36)%}    
+            <option value={{context.local_hospital_details[i]['id']}}>{{context.local_hospital_details[i]['hospital']['name']}}</option>
+            {%endfor%} 
+          </select>    
+          <button id="btn" type="button" onClick="hospitalDetails(input.value);">Get the Selected Value</button>
+         
+      
+          <p>
+            
+      
+            <label>Cumulative local : </label>
+            <input type="text" id="h_c_l"><br>
+      
+            <label>Cumulative foreign:</label>
+            <input type="text" id="h_c_f"><br>
+      
+            <label>Treatment local : </label>
+            <input type="text" id="h_t_l"><br>
+      
+            <label>Treatment foreign : </label>
+            <input type="text" id="h_t_f"><br>
+          </p>
+        
+       </form>
+
+      </div>
+      <div class="col-m6" style="background-color:rgb(66, 5, 5);"> sdg</div>
+
     </div>
 </div>
 <br>
@@ -199,59 +232,24 @@
 </script>
 
 
-
-
-<!-------------------------------------------------->
-
-
-
-<form>
-  <p>
-    <label>Text Input: </label>
-    <input type="text" id="form1">
-  </p>
-  
-    <label>Dropdown Input: </label>
-    <select id="input">
-      {%for i in range(0, 36)%}    
-      <option value={{context.local_hospital_details[i]['id']}}>{{context.local_hospital_details[i]['hospital']['name']}}</option>
-      {%endfor%} 
-    </select>    
-    <button id="btn" onClick="hospitalDetails(input.value); return true;">Get the Selected Value</button>
-    <p>{{context.local_hospital_details[1]}}</p>
-  
- </form>
 <script type="text/javascript">
   function hospitalDetails(hos_id_no){
-    console.log(a)
-    console.log("entered hos data");
+    var h_data_json=JSON.parse('{{context.local_hospital_details | tojson}}');
+    console.log(h_data_json);
        
     const btn = document.querySelector('#btn');
     const sb = document.querySelector('#input');
-    document.getElementById('form1').value = hos_id_no ;
-    alert(sb.value);
+
+    hos_id = hos_id_no-1;
+    document.getElementById('h_c_l').value = h_data_json[hos_id]['cumulative_local'] ;
+    document.getElementById('h_c_f').value = h_data_json[hos_id]['cumulative_foreign'] ;
+    document.getElementById('h_t_l').value = h_data_json[hos_id]['treatment_local'] ;
+    document.getElementById('h_t_f').value = h_data_json[hos_id]['treatment_foreign'] ;
+
     
   };
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-<!-------------------------------------------------->
-
-
-
-
-
 
 
 
