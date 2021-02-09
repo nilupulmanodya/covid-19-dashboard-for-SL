@@ -1,5 +1,7 @@
-<h1> Covid-19-dashbord-for-SL </h1>
-<img src="#">
+# Covid-19-dashbord-for-SL
+Python Flask server used to develop the project.<br>
+<a href="https://flask.palletsprojects.com/en/1.1.x/"><img src= "https://github.com/nilupulmanodya/covid-19-dashbord-for-SL/blob/main/flask.png"  height="25" width = "75"></a>
+
 <p>Dashboards to monitor Novel Coronavirus situation in Sri Lanka which provides the current real time situation of the Covid-19 with Covid-19 hospital treatment details. </P>
 
 ### Dashboard
