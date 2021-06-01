@@ -31,4 +31,4 @@ Flask Server used to develop the project.
   <li>altair</li>
 </ul>
 
-<p>Details of Country codes can be found <a href="https://gist.githubusercontent.com/komasaru/9303029/raw/9ea6e5900715afec6ce4ff79a0c4102b09180ddd/iso_3166_1.csv">here</a>.</p>
+<p> Details of Country codes can be found <a href="https://gist.githubusercontent.com/komasaru/9303029/raw/9ea6e5900715afec6ce4ff79a0c4102b09180ddd/iso_3166_1.csv">here</a>.</p>
