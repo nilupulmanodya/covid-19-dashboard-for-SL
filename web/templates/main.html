@@ -1,256 +1,280 @@
-{% extends "headfoot.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>COVID-19 RAL-TIME STATUS</title>
 
-{% block content %}
-<div class = "col">
-    <h2>Covid-19 Situation in Sri Lanka</h2>
-    <p>Last Updated: {{context.update_date_time}}</p>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/2b115f37c8.js" crossorigin="anonymous"></script>
 
-<div  class="row" >
-    
-  <div  class="col-md">	  
-               
-		<div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(248, 127, 127);">
-      <h8 style="color:rgb(71, 0, 0);">Confirmed cases</h8>		
-      <p></p>	           
-            <h3 style="color:rgb(192, 2, 2);">{{context.local_total_cases}}</h3>
+
+	<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">>-->
+
+
+	<!-- Import Vega 3 & Vega-Lite 2 (does not have to be from CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-tooltip@0.16.0/build/vega-tooltip.min.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+  <script src="https://vega.github.io/datalib/datalib.min.js"></script>
+</head>
+<body>
+
+	<div class="container">
+
+		<!--header srart-->
+
+		<div class="heading"><h1>COVID-19 REAL-TIME STATUS</h1></div>
+		<hr>
+		<!--header end-->
+
+		<!--status_cards srart-->
+		<div class="col_10">
+					
+
+			<h2>Covid-19 Situation in Sri Lanka</h2>
+			<h4>Last Updated: {{context.update_date_time}}</h4>
+
+
+				<div class="col_10" style="text-align: center;">
+					<div class="box_1" style="background-color:#B93C32;">
+						<h2><i class="fas fa-gavel"></i>{{context.local_total_cases}}</h2>
+						<h3>Conformed cases</h3>
+
+					</div>
+
+					<div class="box_1" style="background-color:#F03F37;">
+						<h2><i class="fas fa-running"></i>{{context.local_active_cases}}</h2>
+						<h3>Active cases</h3>
+					</div>
+
+					<div class="box_1" style="background-color:#E65100;">
+						<h2><i class="fab fa-font-awesome-flag" style="transform: rotate(20deg);"></i></i>{{context.local_deaths}}</h2>
+						<h3>deaths</h3>
+					</div>
+
+					<div class="box_1"style="background-color:#FD8F23;">
+						<h2><i class="fas fa-user-check"></i>{{context.local_recovered}}</h2>
+						<h3>Recovered</h3>
+					</div>
+
+					<div class="box_1"style="background-color:#FFC30B;">
+						<h2><i class="fas fa-chart-line"></i>{{context.local_new_cases}}</h2>
+						<h3>Daily New Cases</h3>
+					</div>
+
+					<div class="box_1"style="background-color:#45A44A;">
+						<h2><i class="fas fa-percentage"></i>{{context.local_death_rate}}</h2>
+						<h3>Death Rate</h3>
+					</div>
+
+					<div class="box_1"style="background-color:#464458;">
+						<h2><i class="fas fa-percentage"></i>{{context.local_recovery_rate}}</h2>
+						<h3>Recovery Rate</h3>
+					</div>
+				<dv><!-- 
+			
+			 --><!--status_cards end--><!-- 
+		 --></div> 
+		<hr>
+		 <div class="col_10"><!-- 
+
+
+			---------side bar start----------------
+
+			 --><div class="col_2 side_bar">
+				
+				<h1 class="bed_icon"><i class="fas fa-procedures "></i></i></h1>
+				<h2>Covid-19 Hospital details in <br> Sri Lanka</h2>
+				<form>
+											
+						<label for="hospitals">Hospital Name:</label>
+							<select id="input" class="dropbox" name="hospitals">
+							    {%for i in range(0, 36)%}    
+								<option value={{context.local_hospital_details[i]['id']}}>{{context.local_hospital_details[i]['hospital']['name']}}</option>
+								{%endfor%} 
+							</select>	
+							
+						<button type="button" onClick="hospitalDetails(input.value);" style=" width:70%; margin: 5% 10% 10% 10%; ">Show Details</button>
+
+		 
+
+
+
+								<br>
+								<i class="fa fas fa-bullhorn"></i><label for="">Cumulative local :</label>
+								<!--<h2>0</h2>-->
+								<input style="border: none;" placeholder="Choose hospital and press button" type="text" id="h_c_l"><br>
+								
+								<i  class="fa fas fa-bullhorn"></i><label for="">Cumulative foreign:</label>
+								
+								<input style="border: none;" placeholder="Choose hospital and press button" type="text" id="h_c_f"><br>
+								<i class="fa fas fa-bullhorn"></i><label for="">Treatment local   :</label>
+								
+								<input style="border: none;" placeholder="Choose hospital and press button" type="text" id="h_t_l"><br>
+								<i class="fa fas fa-bullhorn"></i><label for="">Treatment foreign:</label>
+								
+								<input style="border: none;" placeholder="Choose hospital and press button" type="text" id="h_t_f"><br>
+											 
+
+				</form>
+
+			</div><!--
+
+			---------side bar end----------------
+ href="{{ url_for('static', filename='css/main.css') }}
+
+			--><div class="col_8" style="overflow: hidden;"><!--
+				--><div class=" graph_box col_5"><!--
+					--><h3>Predicted Total cases for the next 15 Days</h3>
+						<!--<img src="{{ url_for('static', filename='images/chart1.png') }}" alt="">-->
+						{% include "figure1.html" %}
+					</div><!--
+
+
+			 	 --><div class=" graph_box col_5">
+					<h3>Predicted Daily Deaths for the next 15 Days</h3>
+						 <!--<img src="{{ url_for('static', filename='images/chart1.png') }}" alt="">-->
+						 {% include "figure2.html" %}
+			    	</div>   
+				</div>
 		</div>
-  </div>
 
-  <div class="col-md">
-		<div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(123, 153, 251);">
-      <h8 style="color:rgb(3, 24, 95);">Active cases</h8>	
-      <p></p>		           
-            <h3 style="color:rgb(10, 60, 224);">{{context.local_active_cases}}</h3>
+		<hr>
+		<h3 style="text-align: center;">Covid-19 PCR testing details in Sri Lanka</h3>
+			<h4 style="text-align: center;">Last Updated: {{context.update_date_time}}</h4>
+
+		<div class="col_10 barchart">
+			
+			<!--<img src="{{ url_for('static', filename='images/barchart.png') }}" alt="">-->
+			
+				<!-- Placeholder for graph-->
+			<div id="pcr_graph"></div>
+		 
 		</div>
-  </div>
+	
 
-  <div class="col-md">
-		<div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(185, 182, 182);">
-      <h8 style="color:rgb(31, 30, 30);">Deaths</h8>			 
-      <p></p>          
-        <h3 style="color:rgb(63, 63, 63);">{{context.local_deaths}}</h3>
+		
+
+		<hr>
+
+		<div class="col_10" >
+			<!--dlobal status_cards srart-->
+
+			<h2>Covid-19 Global Situation</h2>
+			<h4>Last Updated: {{context.global_update_date}}</h4>
+
+
+			<div class="col_10" style="text-align: center;">
+
+					<div class="box_1" style="background-color:#B93C32;">
+						<h2>{{context.global_total_confirmed}}</h2>
+						<h3>Conformed cases</h3>
+
+					</div>
+
+					<div class="box_1" style="background-color:#F03F37;">
+						<h2>{{context.global_active_cases}}</h2>
+						<h3>Active cases</h3>
+					</div>
+
+					<div class="box_1" style="background-color:#E65100;">
+						<h2>{{context.global_total_deaths}}</h2>
+						<h3>deaths</h3>
+					</div>
+
+					<div class="box_1"style="background-color:#FD8F23;">
+						<h2>{{context.global_total_recovered}}</h2>
+						<h3>Recovered</h3>
+						
+					</div>
+
+					<div class="box_1"style="background-color:#FFC30B;">
+						<h2>{{context.global_today_new}}</h2>
+						<h3>Daily New Cases</h3>
+					</div>
+
+					<div class="box_1"style="background-color:#45A44A;">
+						<h2>{{context.global_death_rate}}</h2>
+						<h3>Death Rate</h3>
+					</div>
+
+					<div class="box_1"style="background-color:#464458;">
+						<h2>{{context.global_recovery_rate}}</h2>
+						<h3>Recovery Rate</h3>
+					</div>
+			</div>
+
+			<!-- global status_cards end-->
+
+
 		</div>
-  </div>
 
-  <div class="col-md">
-		<div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(159, 240, 173);">
-      <h8 style="color:rgb(2, 80, 15);">Recovered</h8>			
-      <p></p>           
-        <h3 style="color:rgb(7, 207, 41);">{{context.local_recovered}}</h3>       
+		<hr>
 
+		<!--map srart -->
+
+		<div class="col_10 map">
+			<h3>Global covid -19 Map</h3>
+			<div id="global_heat_map"></div>
 		</div>
-  </div>
+		<!--map srart -->
 
-  <div class="col-md">
-		<div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(211, 255, 140);">
-      <h8 style="color:rgb(44, 80, 2);">Daily New Cases</h8>		
-      <p></p>	           
-        <h3 style="color:rgb(165, 235, 2);">{{context.local_new_cases}}</h3>       
+
+
+		<!-- footer start -->
+
+		<div class="footer">
+			<br>
+  			<p>@2021 manodya&madhushanka</p>
+		</div>
+
+		<!-- footer end -->
+
 	</div>
-  </div>
-
-  <div class="col-md">
-    <div class="row">
-      <div class="col-md">
-		<div id="dev_wig" class="card dev_h8" style="background-color:rgb(184, 195, 167);">
-      <div class="card-body" style="background-color:rgb(185, 182, 182);">
-        <h8>Death Rate</h8>
-        <h3 style="color:rgb(63, 63, 63);">{{context.local_death_rate}}%</h3>		           
-    </div>
-    
-    <div class="card-body" style="background-color:rgb(159, 240, 173);">
-      <h8>Recovery Rate</h8>			           
-      <h3 style="color:rgb(7, 207, 41);">{{context.local_recovery_rate}}%</h3> 
-    </div>
-  </div>
-    </div>
-    
-  </div>
-  </div>
-</div></div>
-<br>
-<br>
-<div class="col">
-	
-		<div class="card card-body" style="background-color:rgb(216, 213, 213);">
-
-            <h5>PCR Testing in Sri Lanka</h5>
-            <p></p>
-            
-            <div class="scrollmenu">
-                  <!-- Placeholder for graph-->
-              <div id="pcr_graph"></div>
-            </div>
-
-		</div>
-<br>
-    <div class="card card-body" style="background-color:rgb(216, 210, 210);">
-      <div class="col-md">
-        <h5>Covid-19 Hospital details in Sri Lanka</h5>
-        <hr>
-        <form>
-  
-  
-          <label>Hospital Name: </label>
-          <select id="input">
-            {%for i in range(0, 36)%}    
-            <option value={{context.local_hospital_details[i]['id']}}>{{context.local_hospital_details[i]['hospital']['name']}}</option>
-            {%endfor%} 
-          </select>    
-          <button id="btn" type="button" onClick="hospitalDetails(input.value);">Get the Selected Value</button>
-         
-      
-          <p>
-            
-      
-            <label>Cumulative local : </label>
-            <input type="text" id="h_c_l"><br>
-      
-            <label>Cumulative foreign:</label>
-            <input type="text" id="h_c_f"><br>
-      
-            <label>Treatment local : </label>
-            <input type="text" id="h_t_l"><br>
-      
-            <label>Treatment foreign : </label>
-            <input type="text" id="h_t_f"><br>
-          </p>
-        
-       </form>
-
-      </div>
-      <div class="col-m6" style="background-color:rgb(66, 5, 5);"> sdg</div>
-
-    </div>
-</div>
-<br>
-<hr>
-<br>
-<div class = "col">
-  <h2>Covid-19 Global Situation</h2>
-  <p>Last Updated: {{context.global_update_date}}</p>
-
-<div  class="row" >
-  <div  class="col-md">	           
-  <div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(248, 127, 127);">
-    <h8 style="color:rgb(71, 0, 0);">Confirmed cases</h8>	
-    <p></p>		           
-          <h3 style="color:rgb(192, 2, 2);">{{context.global_total_confirmed}}</h3>
-  </div>
-</div>
-
-<div class="col-md">
-  <div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(123, 153, 251);">
-    <h8 style="color:rgb(3, 24, 95);">Active cases</h8>	
-    <p></p>		           
-          <h3 style="color:rgb(10, 60, 224);"></h3>    
-  </div>
-</div>
-
-<div class="col-md">
-  <div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(185, 182, 182);">
-    <h8 style="color:rgb(31, 30, 30);">Deaths</h8>			           
-      <h3 style="color:rgb(63, 63, 63);">{{context.global_total_deaths}}</h3>
-            <p></p>
-  </div>
-</div>
-
-<div class="col-md">
-  <div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(159, 240, 173);">
-    <h8 style="color:rgb(2, 80, 15);">Recovered</h8>		
-    <p></p>	           
-      <h3 style="color:rgb(7, 207, 41);">{{context.global_total_recovered}}</h3>    
-  </div>
-</div>
-
-<div class="col-md">
-  <div id="dev_wig" class="card card-body dev_h8" style="background-color:rgb(211, 255, 140);">
-    <h8 style="color:rgb(44, 80, 2);">Daily New Cases</h8>		
-    <p></p>	           
-      <h3 style="color:rgb(165, 235, 2);">{{context.global_today_new}}</h3>      
-  </div>
-</div>
-
-<div class="col-md">
-  <div class="row">
-    <div class="col-md">
-  <div id="dev_wig" class="card dev_h8" style="background-color:rgb(184, 195, 167);">
-    <div class="card-body" style="background-color:rgb(185, 182, 182);">
-      <h8>Death Rate</h8>
-      <h3 style="color:rgb(63, 63, 63);">{{context.global_death_rate}}%</h3>		           
-  </div>
-  
-  <div class="card-body" style="background-color:rgb(159, 240, 173);">
-    <h8>Recovery Rate</h8>			           
-    <h3 style="color:rgb(7, 207, 41);">{{context.global_recovery_rate}}%</h3> 
-  </div>
-</div>
-  </div>
-  
-</div>
-</div>
-</div></div>
-<br>
-<div class="col">
-	
-    <div class="card card-body" style="background-color:rgb(240, 235, 235);">
-
-        <h5>Visualize Heat map</h5>
-        <hr>
-        <div class="container-fluid">
-          <div class="row">
-              <div id="col_w_map" class="col"></div>
-              <div class="col-6 scrollmenu">
-                  <!-- Placeholder for map-->
-                  <div id="global_heat_map"></div>
-              </div>
-              <div id="col_w_map" class="col"> </div>
-          </div>          
-      </div>
-
-    </div>
-<br>
-</div>
-
+	<script type="text/javascript">
+		function hospitalDetails(hos_id_no){
+		  var h_data_json=JSON.parse('{{context.local_hospital_details | tojson}}');
+		  console.log(h_data_json);
+			 
+		  const btn = document.querySelector('#btn');
+		  const sb = document.querySelector('#input');
+	  
+		  hos_id = hos_id_no-1;
+		  document.getElementById('h_c_l').value = h_data_json[hos_id]['cumulative_local'] ;
+		  document.getElementById('h_c_f').value = h_data_json[hos_id]['cumulative_foreign'] ;
+		  document.getElementById('h_t_l').value = h_data_json[hos_id]['treatment_local'] ;
+		  document.getElementById('h_t_f').value = h_data_json[hos_id]['treatment_foreign'] ;
+	  
+		  
+		};
+	  
+	  </script>
 
 <script type="text/javascript">
-  function parse(url, div) {
-      var opt = {
-          mode: "vega-lite",
-          renderer: "svg",
-          actions: { export: true, source: false, editor: false }
-      };
-      vegaEmbed("#" + div, url, opt, function (error, result) {
-          // result.view is the Vega View, url is the original Vega-Lite specification
-          vegaTooltip.vegaLite(result.view, url);
-      });
-  }
-  //Parse your Json variable here
-  parse({{ context.local_pcr_test_chart_json | safe }}, "pcr_graph");
-  parse({{ context.global_map_json | safe }}, "global_heat_map");
- 
-</script>
+	function parse(url, div) {
+		var opt = {
+			mode: "vega-lite",
+			renderer: "svg",
+			actions: { export: true, source: false, editor: false }
+		};
+		vegaEmbed("#" + div, url, opt, function (error, result) {
+			// result.view is the Vega View, url is the original Vega-Lite specification
+			vegaTooltip.vegaLite(result.view, url);
+		});
+	}
+	//Parse your Json variable here
+	parse({{ context.local_pcr_test_chart_json | safe }}, "pcr_graph");
+	parse({{ context.global_map_json | safe }}, "global_heat_map");
+   
+  </script>
 
 
-<script type="text/javascript">
-  function hospitalDetails(hos_id_no){
-    var h_data_json=JSON.parse('{{context.local_hospital_details | tojson}}');
-    console.log(h_data_json);
-       
-    const btn = document.querySelector('#btn');
-    const sb = document.querySelector('#input');
-
-    hos_id = hos_id_no-1;
-    document.getElementById('h_c_l').value = h_data_json[hos_id]['cumulative_local'] ;
-    document.getElementById('h_c_f').value = h_data_json[hos_id]['cumulative_foreign'] ;
-    document.getElementById('h_t_l').value = h_data_json[hos_id]['treatment_local'] ;
-    document.getElementById('h_t_f').value = h_data_json[hos_id]['treatment_foreign'] ;
-
-    
-  };
-
-</script>
-
-
-
-{% endblock %}
+</body>
+</html>
