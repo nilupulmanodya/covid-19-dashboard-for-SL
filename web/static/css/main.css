@@ -1,34 +1,264 @@
-
-h1{
-    text-align: center;
+.container{
+	width: 96%;
+	margin: 1px;
+}
+.col_1{
+	width: 10%;
+	display: inline-block;
+}
+.col_2{
+	width: 20%;
+	display: inline-block;
+	
+}
+.col_3{
+	width: 30%;
+	display: inline-block;
+}
+.col_4{
+	width: 40%;
+	display: inline-block;
+}
+.col_5{
+	width: 50%;
+	display: inline-block;
+}
+.col_6{
+	width: 60%;
+	display: inline-block;
+}
+.col_7{
+	width: 70%;
+	display: inline-block;
+}
+.col_8{
+	width: 80%;
+	display: inline-block;
+	
+}
+.col_9{
+	width: 90%;
+	display: inline-block;
+}
+.col_10{
+	width: 100%;
+	display: inline-block;
 }
 
-#dev_wig{
-    height: 160px;
-    width: 100%;
-    opacity:0.95;
+hr{
+	border: 5px solid #C4C4C4;
+	border-radius: 5px; 
+}
+/*****************************for heading***********************************************/
+
+.heading{
+	background-color: #C4C4C4;
+	text-align: center;
+	border-radius: 50px 50px 50px 50px;
+	
 }
 
-.dev_h8{
-    text-align: center;
-    margin:4px;
+.heading h1 {
+	font-style: bold;
+	font-size: 24pt;
+	margin: 1px;
+	padding: 0.5%;
+}
+/*****************************for sidebar***********************************************/
+
+.side_bar{
+	/*background-color:;*/
+	height: 450px;
+	overflow:auto;
+	vertical-align: top;
+	text-emphasis: center;
+	margin-top: 5px; 
 }
 
-.dev_p
-    h1 {
-        font-size: 10px;
+.bed_icon{
+	font-weight: 1500;
+	font-size: 40pt; 
+	text-align:center;
 }
 
-#pcr_graph{
-    height: 340px;
-    width: 100px;
-   }
 
-div.scrollmenu {
-    overflow: auto;
-    white-space: nowrap;
-  }
+.dropbox{
+	margin-top:5%; 
+	width: 95%; 
+	border-radius: 8px; 
+	border:none;
+	background-color:  #eeeeee;
+}
 
-#col_w_map{
-    width: 20;
+.dropbox option{
+	width:10px;
+}
+.fa{
+	padding-right:10px; 
+}
+
+
+/*****************************for status_part***********************************************/
+.localdsbd{
+	text-align: center;
+	margin:5px 0;
+}
+
+
+.status{
+	height: 100%;
+	display: inline-block;
+	text-align: left;
+}
+
+.box_1{
+	width:14%;
+	height:100px;
+	background-color: white;
+	display: inline-block;
+	 color :white; 
+	 vertical-align: top; 
+	 text-align: center;
+
+}
+.box_1 h2{
+	padding-right:25%;
+	margin-bottom: 0;
+}
+.box_1 h2 i{
+	padding: 10px; 
+	font-size: 20pt;
+}
+.box_1 h3{
+	padding-right:2px;
+	 margin-top:0;
+}
+
+
+.graph_box{
+	height: 500px;
+	display: inline-block;	
+	position: relative;
+	margin-top: 5px;
+	text-align:center;
+	/*overflow: auto;*/
+
+	
+}
+.graph_box h3{
+	position:relative;
+}
+
+/*******************************barchart*********************************************/
+
+.barchart{
+	margin-top:5px;
+	height: 450px;
+	margin-bottom: 50px;
+	text-align: center;
+	overflow: auto;
+
+}
+
+
+/*******************************map*********************************************/
+
+.map{
+	margin-top:5px;
+	background-color: #C4C4C4;
+	/*height: 300px;*/
+	margin-bottom: 70px;
+	overflow: auto;
+	text-align: center;
+}
+
+
+/****************************footer************************************/
+
+.footer {
+   /*position: fixed;*/
+   left: 0;
+   bottom: 0;
+   height:80px;
+   width: 100%;
+   background-color: #2f2f2f;
+   color: rgb(236, 229, 229);
+   text-align: center;
+   /*border-top: 3px solid white;*/
+}
+
+
+/**************************Responsive*****************************/
+
+@media screen and (max-width: 1000px) {
+.col_1y{
+	width: 100%;
+	display: inline-block;
+}
+.col_2{
+	width: 100%;
+	display: inline-block;
+}
+.col_3{
+	width: 100%;
+	display: inline-block;
+}
+.col_4{
+	width: 100%;
+	display: inline-block;
+}
+.col_5{
+	width: 100%;
+	display: inline-block;
+}
+.col_6{
+	width: 100%;
+	display: inline-block;
+}
+.col_7{
+	width: 100%;
+	display: inline-block;
+}
+.col_8{
+	width: 100%;
+	display: inline-block;
+}
+.col_9{
+	width: 100%;
+	display: inline-block;
+}
+.col_10{
+	width: 100%;
+	display: inline-block;
+}
+/****************************status responsive***********************************/
+.box_1{
+	width:90%;
+	height:100px;
+	background-color: white;
+	display: inline-block;
+	 color :white; 
+	 vertical-align: top; 
+	 text-align: center;
+
+}
+
+.box_1 h2{
+	padding-right: 0;
+	margin-bottom: 0;
+}
+.box_1 h2 i{
+
+	font-size: 20pt;
+}
+.box_1 h3{
+	
+	 margin-top:0;
+}
+/*graph responsive*/
+
+.graph_box{
+	overflow: auto;
+}
+
 }

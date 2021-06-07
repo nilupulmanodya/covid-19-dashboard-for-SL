@@ -6,6 +6,137 @@ from urllib3 import request# to handle certificate verification
 import certifi# to manage json data
 import json# for pandas dataframes
 from pandas.io.json import json_normalize
+import matplotlib.pyplot as plt 
+import matplotlib.colors as mcolors
+plt.style.use('fivethirtyeight')
+import mpld3
+from statsmodels.tsa.arima_model import ARIMA
+import datetime
+from datetime import timedelta
+from sklearn.model_selection import train_test_split
+
+
+
+
+
+confirmed_df = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv')
+
+sl_confirmed_df = pd.DataFrame(confirmed_df.loc[[236]])
+
+deaths_df = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv')
+
+cols = sl_confirmed_df.keys()
+
+sl_deaths_df = pd.DataFrame(deaths_df.loc[[236]])
+
+sl_confirmed = sl_confirmed_df.loc[:, cols[4]:cols[-1]]
+sl_deaths = sl_deaths_df.loc[:, cols[4]:cols[-1]]
+
+dates = sl_confirmed.keys()
+
+
+def daily_increase(data):
+    d = [] 
+    for i in range(len(data)):
+        if i == 0:
+            d.append([data[i][0],data[0][1]])
+        else:
+            d.append([data[i][0],data[i][1]-data[i-1][1]])
+    return d 
+
+
+    
+def get_country_info(country_name):
+    country_cases = []
+    country_deaths = []
+#     country_recoveries = []  
+    
+    for i in dates:
+        country_cases.append([(datetime.datetime.strptime(i, '%m/%d/%y')).date(),confirmed_df[confirmed_df['Country/Region']==country_name][i].sum()])
+        country_deaths.append([(datetime.datetime.strptime(i, '%m/%d/%y')).date(),deaths_df[deaths_df['Country/Region']==country_name][i].sum()])
+#         country_recoveries.append(recoveries_df[recoveries_df['Country/Region']==country_name][i].sum())
+    return (country_cases, country_deaths)
+
+    
+def country_visualizations(country_name):
+    country_info = get_country_info(country_name)
+    country_cases = country_info[0]
+    country_deaths = country_info[1]
+    
+    country_daily_increase = daily_increase(country_cases)
+    country_daily_death = daily_increase(country_deaths)
+#     country_daily_recovery = daily_increase(country_recoveries)
+    
+    return ( country_cases, country_daily_increase, country_daily_death, country_name)
+
+country_cases, country_daily_increase, country_daily_death, country_name = country_visualizations('Sri Lanka')
+
+country_cases_df = pd.DataFrame(country_cases, columns=['Date','cases'])
+country_daily_increase_df = pd.DataFrame(country_daily_increase, columns=['Date','cases'])
+country_daily_death_df = pd.DataFrame(country_daily_death, columns=['Date','cases'])
+
+
+
+arima = ARIMA(country_cases_df['cases'], order=(5, 1, 0))
+arima = arima.fit(trend='c', full_output=True, disp=True)
+forecast = arima.forecast(steps= 30)
+pred = list(forecast[0])
+
+start_date = country_cases_df['Date'].iloc[-1]
+prediction_dates = []
+for i in range(30):
+    date = start_date + timedelta(days=1)
+    prediction_dates.append(date)
+    start_date = date
+
+fig=plt.figure()
+#plt.xlabel("Dates",fontsize = 20)
+plt.ylabel('Total cases',fontsize = 20)
+#plt.title("Predicted Total cases for the next 15 Days" , fontsize = 20)
+
+obj, = plt.plot_date(y= pred,x= prediction_dates,linestyle ='dashed',color = '#ff9999',label = 'Predicted');
+obj, = plt.plot_date(y=country_cases_df['cases'],x=country_cases_df['Date'],linestyle = '-',color = 'blue',label = 'Actual');
+plt.legend();
+
+
+html_str = mpld3.fig_to_html(fig)
+mpld3.save_html(fig,"templates/figure1.html")
+
+#Html_file= open("index.html","w")
+#Html_file.write(html_str)
+#Html_file.close()
+
+#obj, = plt.plot([3,1,4,1,5])
+
+
+
+arima = ARIMA(country_daily_death_df['cases'], order=(5, 1, 0))
+arima = arima.fit(trend='c', full_output=True, disp=True)
+forecast = arima.forecast(steps= 30)
+pred = list(forecast[0])
+
+start_date = country_daily_death_df['Date'].iloc[-1]
+prediction_dates = []
+for i in range(30):
+    date = start_date + timedelta(days=1)
+    prediction_dates.append(date)
+    start_date = date
+fig=plt.figure()
+#plt.xlabel("Dates",fontsize = 20)
+plt.ylabel('Total cases',fontsize = 20)
+#plt.title("Predicted Daily Deaths for the next 15 Days" , fontsize = 20)
+
+plt.plot_date(y= pred,x= prediction_dates,linestyle ='dashed',color = '#ff9999',label = 'Predicted');
+plt.plot_date(y=country_daily_death_df['cases'],x=country_daily_death_df['Date'],linestyle = '-',color = 'blue',label = 'Actual');
+plt.legend();
+
+html_str = mpld3.fig_to_html(fig)
+mpld3.save_html(fig,"templates/figure2.html")
+#plt.savefig('test.png')
+
+
+
+
 
 
 
@@ -59,13 +190,14 @@ def global_all_status():
     data = json.loads(r.data.decode('utf-8'))
     #except ValueError:  # includes simplejson.decoder.JSONDecodeError
     #    print ('Decoding JSON has failed')
-    global_total_confirmed = global_total_confirmed = data['Global']['TotalConfirmed']
+    
+    global_total_confirmed = data['Global']['TotalConfirmed']
     global_today_new = data['Global']['NewConfirmed']
     global_total_deaths = data['Global']['TotalDeaths']
     global_total_recovered = data['Global']['TotalRecovered']
     global_update_date = data['Global']['Date']
     counties_df = pd.json_normalize(data,'Countries')
-
+    global_active_cases = global_total_confirmed-global_total_recovered
     #import country geo data for map
 
     c_url = "https://gist.githubusercontent.com/komasaru/9303029/raw/9ea6e5900715afec6ce4ff79a0c4102b09180ddd/iso_3166_1.csv"
@@ -80,9 +212,7 @@ def global_all_status():
     global_death_rate = round(int(global_total_deaths)/int(global_total_confirmed)*100,2)
     global_recovery_rate = round(int(global_total_recovered)/int(global_total_confirmed)*100,2)
 
-    return (global_total_confirmed, global_today_new, global_total_deaths, global_total_recovered,
+    return (global_active_cases, global_total_confirmed, global_today_new, global_total_deaths, global_total_recovered,
      global_update_date, global_map_json, global_death_rate, global_recovery_rate)
 
 
-
-    
