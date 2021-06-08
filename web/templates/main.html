@@ -158,7 +158,33 @@
 			<div id="pcr_graph"></div>
 		 
 		</div>
-	
+		<div class="col_10 "style="text-align: center;" >
+			<div class=" graph_box col_5">
+				<h3>Local Vaccinated Status</h3>
+				<div id="vaccinated_chart"></div>
+				<p>People vaccinated = 456786	People fully vaccinated =1564 </p>
+			</div>
+
+				<table style="border:1px solid black;margin-left:auto;margin-right:auto;" >
+					<tr>
+						<th>Vaccine</th><th>Count</th>
+					</tr>
+					<tr>
+						<td>name1</td><td>1234564654</td>
+					</tr>
+					<tr>
+						<td>name1</td><td>1234564654</td>
+					</tr>
+					<tr>
+						<td>name1</td><td>1234564654</td>
+					</tr>
+					<tr>
+						<td>name1</td><td>1234564654</td>
+					</tr>
+				</table>
+
+			</div>
+	</div>
 
 		
 
@@ -272,6 +298,7 @@
 	//Parse your Json variable here
 	parse({{ context.local_pcr_test_chart_json | safe }}, "pcr_graph");
 	parse({{ context.global_map_json | safe }}, "global_heat_map");
+	parse({{ context.vaccinated_chart | safe }}, "vaccinated_chart");
    
   </script>
 

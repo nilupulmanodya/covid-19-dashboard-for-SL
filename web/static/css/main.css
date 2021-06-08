@@ -1,5 +1,5 @@
 .container{
-	width: 96%;
+	width: 100%;
 	margin: 1px;
 }
 .col_1{
@@ -144,6 +144,9 @@ hr{
 	/*overflow: auto;*/
 
 	
+}
+.vac_graph{
+	height:1000px;
 }
 .graph_box h3{
 	position:relative;

@@ -1,4 +1,5 @@
 import pandas as pd
+import altair as alt
 from .altairplt import pcrtestbarchart, global_covid_map
 from .clean_country_data import clean_country_data
 import urllib3
@@ -215,4 +216,50 @@ def global_all_status():
     return (global_active_cases, global_total_confirmed, global_today_new, global_total_deaths, global_total_recovered,
      global_update_date, global_map_json, global_death_rate, global_recovery_rate)
 
+
+def vaccination_data():
+    '''df = pd.read_json("http")'''
+    df = pd.read_csv("covid_data_set.csv")
+    df_lka=df.LKA
+    df_lka_data_days_str = df_lka[14].replace("'", '"')
+    df_lka_data_days_str.replace(" ",'')
+
+    df_lka_data_days_str='{"data":'+df_lka_data_days_str+"}"
+    
+    df_lka_data_days_data_dict = json.loads(df_lka_data_days_str)
+    df_lka_data_days_data_dict['data']
+    new_df=pd.DataFrame.from_dict(df_lka_data_days_data_dict['data'])
+    vaccinated_data = new_df[['date','people_vaccinated','people_fully_vaccinated']]
+    vaccinated_data.fillna(0, inplace=True)
+    vaccinated_data=vaccinated_data[300:]
+
+    vaccinated_chart_json=vaccinated_chart(vaccinated_data)
+
+    return vaccinated_chart_json
+
+
+
+def vaccinated_chart(data):     
+   
+    base = alt.Chart(data).mark_line().encode(
+    x='date:T',
+    y='people_vaccinated:Q',
+   # color='symbol:O'
+    )
+
+    chart = alt.Chart(data).mark_bar().encode(
+    x='date:T',
+    y='people_fully_vaccinated:Q',).properties(
+    width=400,
+    height=250
+)
+    #y='people_fully_vaccinated:Q',
+    #color='symbol:O')
+    
+    
+    
+    chart=chart+base
+    chart_json = chart.to_json()
+    #return chart_json
+    return chart_json
 
