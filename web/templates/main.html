@@ -163,26 +163,24 @@
 				<h3>Local Vaccinated Status</h3>
 				<div id="vaccinated_chart"></div>
 				<p>People vaccinated = 456786	People fully vaccinated =1564 </p>
-			</div>
+			
 
 				<table style="border:1px solid black;margin-left:auto;margin-right:auto;" >
 					<tr>
 						<th>Vaccine</th><th>Count</th>
 					</tr>
 					<tr>
-						<td>name1</td><td>1234564654</td>
+						<td>Sinopharm</td><td>666612</td>
 					</tr>
 					<tr>
-						<td>name1</td><td>1234564654</td>
+						<td>Sputnik V</td><td>16664</td>
 					</tr>
 					<tr>
-						<td>name1</td><td>1234564654</td>
+						<td>Covishield</td><td>925242</td>
 					</tr>
-					<tr>
-						<td>name1</td><td>1234564654</td>
-					</tr>
-				</table>
 
+				</table><br><br><br>
+</div>
 			</div>
 	</div>
 
@@ -190,41 +188,88 @@
 
 		<hr>
 
-		<h3 style="text-align: center;">Covid-19 PCR testing details in Sri Lanka</h3>
-			<h4 style="text-align: center;">Last Updated: {{context.update_date_time}}</h4>
-
-		<div class="col_10 barchart">
-			
-			<!--<img src="{{ url_for('static', filename='images/barchart.png') }}" alt="">-->
-			
-				<!-- Placeholder for graph-->
-			<div id="pcr_graph"></div>
-		 
-		</div>
-	
-
-		
-
-		<hr>
-
-		<h3 style="text-align: center;">Covid-19 PCR testing details in Sri Lanka</h3>
-			<h4 style="text-align: center;">Last Updated: {{context.update_date_time}}</h4>
-
-		<div class="col_10 barchart">
-			
-			<!--<img src="{{ url_for('static', filename='images/barchart.png') }}" alt="">-->
-			
-				<!-- Placeholder for graph-->
-			<div id="pcr_graph"></div>
-		 
-		</div>
-	
-
-		
-
-		<hr>
-
 		<div class="col_10" >
+				<!--virus variance start-->
+				<button type="button" class="collapsible">Global COVID-19 Varients</button>
+				<div class="content">
+				  <p><table class="varance">
+					  <tr>
+						  <th>Variant of COVID-19</th>
+						  <th>First Detected</th>
+					  </tr>
+					  <tr>
+						  <td>B.1.526</td>
+						  <td>New York, November 2020</td>
+					  </tr>
+					  <tr>
+						  <td>B.1.526.1</td>
+						  <td>New York, October 2020</td>
+					  </tr>
+					  <tr>
+						  <td>B.1.525</td>
+						  <td>United Kingdom/Nigeria, December 2020</td>
+					  </tr>
+					  <tr>
+						  <td>P.2</td>
+						  <td>Japan/Brazil, April 2020</td>
+					  </tr>
+					  <tr>
+						  <td>B.1.617</td>
+						  <td>India, February 2021</td>
+					  </tr>
+					  <tr>
+						  <td>B.1.617.1</td>
+						  <td>India, December 2020</td>
+					  </tr>
+					  <tr>
+						  <td>B.1.617.2</td>
+						  <td>	India, December 2020</td>
+					  </tr>
+					  <tr>
+						  <td>B.1.617.3</td>
+						  <td>India, December 2020</td>
+					  </tr>
+				  </table></p>
+				</div>
+			<button type="button" class="collapsible">Sri Lankan COVID-19 Varients</button>
+				<div class="content">
+				  <p><h3>Variants found so far in Sri Lanka.</h3>
+					  <table class="varance">
+						  <tr>
+							  <th>Virus variation</th>
+							  <th>Variant also known as</th>
+						  </tr>
+						  <tr>
+							  <td>B.1.617</td>
+							  <td>Indian variant</td>
+						  </tr>
+						  <tr>
+							  <td>B.1.1.7</td>
+							  <td>UK variant</td>
+						  </tr>
+						  <tr>
+							  <td>B.1.428</td>
+							  <td>Denmark/European/Middle East variant</td>
+						  </tr>
+						  <tr>
+							  <td>B.1.411</td>
+							  <td>Sri Lankan variant</td>
+						  </tr>
+						  <tr>
+							  <td>B.1.525</td>
+							  <td>(Nigerian variant</td>
+						  </tr>
+						  <tr>
+							  <td> B.1.351</td>
+							  <td>South African variant</td>
+						  </tr>
+					  </table>
+				  </p>
+				</div>
+	
+				<!--virus variance end-->
+				
+	
 			<!--dlobal status_cards srart-->
 
 			<h2>Covid-19 Global Situation</h2>
@@ -335,6 +380,23 @@
 	parse({{ context.vaccinated_chart | safe }}, "vaccinated_chart");
    
   </script>
+  <script>
+	var coll = document.getElementsByClassName("collapsible");
+	var i;
+
+	for (i = 0; i < coll.length; i++) {
+		  coll[i].addEventListener("click", function() {
+		this.classList.toggle("active");
+		var content = this.nextElementSibling;
+		if (content.style.display === "block") {
+			  content.style.display = "none";
+		} else {
+			  content.style.display = "block";
+
+		}
+	  });
+}
+</script>
 
 
 </body>
