@@ -152,6 +152,56 @@ hr{
 	position:relative;
 }
 
+/*********************************for collapsible box**********************************/
+
+
+.collapsible {
+	background-color: #777;
+	color: white;
+	cursor: pointer;
+	padding: 18px;
+	margin-top: 5px;
+	width: 100%;
+	border-radius: 29px;
+	border: none;
+	text-align: left;
+	outline: none;
+	font-size: 15px;
+  }
+  
+  .active, .collapsible:hover {
+	background-color: #555;
+	transition-duration: 2s;
+  }
+  
+  .content {
+	  
+	
+	padding: 0 18px;
+	display: none;
+	overflow: hidden;
+	background-color: #f2f2f2;
+	border-radius: 5px;
+  }
+  
+  .varance{
+	  font-family: Arial, Helvetica, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+  }
+  
+  .varance td, .varance th{
+	  border: 1px solid #ddd;
+	   padding: 8px;
+	   text-align: left;
+  }
+  
+  .varance tr:nth-child(even){background-color: #ffffff;}
+  
+  
+  /*****************************for sidebar***********************************************/
+  
+
 /*******************************barchart*********************************************/
 
 .barchart{
